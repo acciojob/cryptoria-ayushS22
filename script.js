@@ -19,10 +19,10 @@ function mergeSort(arr) {
   if (arr.length <= 1) return arr;
 
   const mid = Math.floor(arr.length / 2);
-  const left = mergeSort(arr.slice(0, mid));
-  const right = mergeSort(arr.slice(mid));
-
-  return merge(left, right);
+  return merge(
+    mergeSort(arr.slice(0, mid)),
+    mergeSort(arr.slice(mid))
+  );
 }
 
 function merge(left, right) {
@@ -47,7 +47,7 @@ const messages = [
   { date: "2023-04-10", content: "Dqrwkhu whvw phvvdjh" }
 ];
 
-export default function App() {
+function App() {
   const decrypted = messages.map(msg => ({
     ...msg,
     content: decrypt(msg.content)
@@ -69,3 +69,6 @@ export default function App() {
     </div>
   );
 }
+
+// 👇 IMPORTANT (no export)
+ReactDOM.render(<App />, document.getElementById("root"));
